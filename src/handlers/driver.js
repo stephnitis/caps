@@ -13,15 +13,15 @@ eventPool.on('PICKUP', driverHandler);
 function driverHandler(payload) {
   setTimeout(() => {
     console.log(`driver picked up ${payload.order.orderId}`);
-  }, 250);
+  }, 5000);
   setTimeout(() => {
     console.log(`in transit ${payload.order.orderId}`);
     eventPool.emit('IN TRANSIT', payload);
-  }, 500);
+  }, 5000);
   setTimeout(() => {
     console.log(`delivered ${payload.order.orderId}`);
     eventPool.emit('DELIVERED', payload);
-  });
+  }, 5000);
 }
 
 
