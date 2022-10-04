@@ -7,22 +7,19 @@ const Chance = require('chance');
 
 const chance = new Chance();
 
-let customer = {
-  name: chance.name(),
-  address: chance.address(),
-};
-
-
 eventPool.on('PICKUP', driverHandler);
 eventPool.on('TRANSIT', vendorHandler);
 eventPool.on('DELIVERY', vendorHandler);
 
 
 setInterval(() => {
-  let customer = {
+  let order = {
+    store: chance.company(),
+    orderId: chance.guid({version: 3}),
     name: chance.name(),
     address: chance.address(),
+
   };
   console.log('----new order begins----');
-  eventPool.emit('PICKUP', {customer});
+  eventPool.emit('PICKUP', {order});
 }, 5000);
