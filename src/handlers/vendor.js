@@ -27,7 +27,10 @@ function vendorHandler(payload) {
   setTimeout(() => {
     console.log(`Please Pickup ${payload.order.orderId}`);
     eventPool.emit('PICKUP', payload);
-  }, 500);
+  }, 5000);
+  setTimeout(() => {
+    eventPool.emit(`thank you ${payload.order.name}`);
+  }, 5000);
 }
 
 
