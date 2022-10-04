@@ -3,24 +3,21 @@
 const eventPool = require('./src/eventPool');
 const vendorHandler = require('./src/handlers/vendor');
 const driverHandler = require('./src/handlers/driver');
-const Chance = require('chance');
 
-const chance = new Chance();
 
+eventPool.on('PICKUP', (payload) => logEvent('PICKUP', payload));
 eventPool.on('PICKUP', driverHandler);
 eventPool.on('TRANSIT', vendorHandler);
 eventPool.on('DELIVERY', vendorHandler);
 
 
-setInterval(() => {
-  const order = {
-    store: chance.company(),
-    orderId: chance.guid({version: 3}),
-    name: chance.name(),
-    address: chance.address(),
-  };
+function logEvent(event, payload){
+  const date = new Date();
+  const time = date.toGMTString();
+  console.log('EVENT', {event, time, payload});
+}
 
-  console.log('----new order begins----');
-  eventPool.emit('PICKUP', {order});
-  eventPool.emit('DELIVERY', {order});
-}, 5000);
+
+
+// date.toDateString();
+// date.toTimeString();
