@@ -3,6 +3,7 @@
 let eventPool = require('../eventPool');
 
 module.exports = (payload) => {
-  console.log('Driver has package in transit', payload);
-  console.log('Driver has delivered package', payload);
+  console.log(`picked up ${payload.order.orderId}`);
+  console.log('in transit', payload);
+  console.log(`delivered ${payload.order.orderId}`);
 };

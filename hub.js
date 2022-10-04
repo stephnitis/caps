@@ -13,13 +13,14 @@ eventPool.on('DELIVERY', vendorHandler);
 
 
 setInterval(() => {
-  let order = {
+  const order = {
     store: chance.company(),
     orderId: chance.guid({version: 3}),
     name: chance.name(),
     address: chance.address(),
-
   };
+
   console.log('----new order begins----');
   eventPool.emit('PICKUP', {order});
+  eventPool.emit('DELIVERY', {order});
 }, 5000);
