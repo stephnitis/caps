@@ -14,7 +14,6 @@ server.on('connection', (socket) => {
 });
 
 caps.on('connection', (socket) => {
-  console.log('socket connected to caps namespace', socket.id);
 
   socket.on('JOIN', (room) => {
     console.log(`Joined the ${room} room`);
@@ -22,11 +21,16 @@ caps.on('connection', (socket) => {
 
   socket.on('PICKUP', (payload) => {
     logEvent('PICKUP', payload);
-    caps.emit('TRANSIT', payload);
+    caps.emit('PICKUP', payload);
   });
 
   socket.on('TRANSIT', (payload) => {
     logEvent('TRANSIT', payload);
+    caps.emit('TRANSIT', payload);
+  });
+
+  socket.on('DELIVERY', (payload) => {
+    logEvent('DELIVERY', payload);
     caps.emit('DELIVERY', payload);
   });
 });

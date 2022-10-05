@@ -7,9 +7,6 @@ const { Chance } = require('chance');
 
 const chance = new Chance();
 
-// const createPickup = require('./createPickup');
-// const pickup = createPickup(socket);
-
 socket.emit('JOIN', 'vendor');
 
 socket.on('connect', () => {
@@ -27,8 +24,6 @@ socket.on('connect', () => {
   }, 2500);
 
 });
-
-// socket.on('connect', pickup);
 
 socket.on('disconnect', () => {
   console.log(socket.id);
