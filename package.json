@@ -1,7 +1,7 @@
 {
   "name": "caps",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Lab 11",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -25,10 +25,9 @@
   "dependencies": {
     "chance": "^1.1.8",
     "eslint": "^8.24.0",
-    "pg": "^8.8.0",
-    "sequelize": "^6.23.2",
-    "sequelize-cli": "^6.5.1",
-    "sqlite3": "^5.1.2",
-    "supertest": "^6.2.4"
-  }
+    "jest": "^29.1.2",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
+  },
+  "devDependencies": {}
 }
