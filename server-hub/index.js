@@ -18,17 +18,16 @@ caps.on('connection', (socket) => {
 
   socket.on('JOIN', (room) => {
     console.log(`Joined the ${room} room`);
-
   });
 
   socket.on('PICKUP', (payload) => {
     logEvent('PICKUP', payload);
-    socket.emit('TRANSIT', payload);
+    caps.emit('TRANSIT', payload);
   });
 
   socket.on('TRANSIT', (payload) => {
     logEvent('TRANSIT', payload);
-    socket.emit('DELIVERY', payload);
+    caps.emit('DELIVERY', payload);
   });
 });
 
