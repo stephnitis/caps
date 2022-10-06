@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 
 const PORT = process.env.PORT || 3002;
 const Queue = require('./lib/queue');
-const uuid = require('uuid').v4;
+
 
 const server = new Server(PORT);
 const caps = server.of('/caps');
@@ -37,9 +37,10 @@ caps.on('connection', (socket) => {
 
   socket.on('DELIVERED', (payload) => {
     logEvent('DELIVERED', payload);
-    let currentQueue = driverQueue.read(payload.queueId);
-    if(!currentQueue){
-      throw new Error('No Queue Created');
+    let currentQueue = vendorQueue.read(payload.queueId);
+    if (!currentQueue){
+      let queueKey = vendorQueue.store(payload.queueId, new Queue());
+      currentQueue = vendorQueue.read(queueKey);
     }
     currentQueue.store(payload.orderId, payload);
     caps.emit('DELIVERED', payload);
@@ -47,7 +48,7 @@ caps.on('connection', (socket) => {
 
   socket.on('RECEIVED', (payload) => {
     logEvent('RECEIVED', payload);
-    let currentQueue = vendorQueue.read(payload.queueId);
+    let currentQueue = driverQueue.read(payload.queueId);
     if(!currentQueue){
       throw new Error('No Queue Created');
     }
